@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
+	<parameter name="name" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="realPath" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select distinct i.stud_id, 
+				(select distinct i.user_value from PA_STUD_USER i where i.stud_id = 'amt_admin' and i.col_num = '40') as naturalidade,
+				(select distinct i.user_value from PA_STUD_USER i where i.stud_id = 'amt_admin' and i.col_num = '60') as data_nasc,
+				(select distinct i.user_value from PA_STUD_USER i where i.stud_id = 'amt_admin' and i.col_num = '70') as tipo_doc,
+				(select distinct i.user_value from PA_STUD_USER i where i.stud_id = 'amt_admin' and i.col_num = '100') as nome,
+				(select distinct i.user_value from PA_STUD_USER i where i.stud_id = 'amt_admin' and i.col_num = '120') as nr_doc,
+				(select distinct i.user_value from PA_STUD_USER i where i.stud_id = 'amt_admin' and i.col_num = '130') as val_doc,
+				e.cpnt_desc as cpnt_desc,
+				e.compl_dte as compl_dte,
+				e.total_hrs as total_hrs
+                    from PA_STUD_USER i, PA_XCPNT_EVTHST e
+                  where 1 = 1
+                   and i.stud_id = $P{name}]]>
+	</queryString>
+	<field name="STUD_ID" class="java.lang.String"/>
+	<field name="NATURALIDADE" class="java.lang.String"/>
+	<field name="DATA_NASC" class="java.lang.String"/>
+	<field name="TIPO_DOC" class="java.lang.String"/>
+	<field name="NOME" class="java.lang.String"/>
+	<field name="NR_DOC" class="java.lang.String"/>
+	<field name="VAL_DOC" class="java.lang.String"/>
+	<field name="CPNT_DESC" class="java.lang.String"/>
+	<field name="COMPL_DTE" class="java.sql.Timestamp"/>
+	<field name="TOTAL_HRS" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="126" splitType="Stretch">
+			<image>
+				<reportElement x="15" y="12" width="527" height="101"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{realPath}+"//jms_logo.PNG"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="97" splitType="Stretch">
+			<staticText>
+				<reportElement x="68" y="22" width="432" height="34"/>
+				<textElement>
+					<font fontName="" size="20"/>
+				</textElement>
+				<text><![CDATA[Certificado de Formação Profissional]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="400" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="36" y="17" width="341" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Certifica-se que " + $F{STUD_ID}+ " natural de " + $F{NATURALIDADE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="36" y="37" width="377" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["nascido em "+$F{DATA_NASC}+ "completou a seguinte acção de formação: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="168" y="68" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOME}]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="345" width="555" height="1"/>
+			</break>
+			<staticText>
+				<reportElement x="36" y="121" width="87" height="20"/>
+				<textElement/>
+				<text><![CDATA[com a duração de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="145" y="121" width="29" height="20"/>
+				<textElement/>
+				<text><![CDATA[horas.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="123" y="121" width="22" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{TOTAL_HRS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="103" splitType="Stretch">
+			<staticText>
+				<reportElement x="36" y="14" width="464" height="20"/>
+				<textElement/>
+				<text><![CDATA[Certificado nº 1/ 2016 de acordo com o modelo publicado na portaria nº474/2010 de 8 de Julho]]></text>
+			</staticText>
+			<break>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</break>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="58"/>
+	</summary>
+</jasperReport>
