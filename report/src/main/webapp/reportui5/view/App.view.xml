@@ -7,7 +7,7 @@
 		<pages>
 			<Page title="{i18n>homePageTitle}">
 				<headerContent>
-					
+					<!-- teste commit  -->
 				</headerContent>
 				<content>
 					<mvc:XMLView viewName="sap.ui.demo.wt.view.HelloPanel"/>
