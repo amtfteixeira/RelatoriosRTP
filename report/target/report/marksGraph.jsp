@@ -63,7 +63,7 @@ prop.setProperty(VJdbcProperties.LOGIN_PASSWORD, "Amtsuper1#");
         	//JasperDesign design = JRXmlLoader.load(path);
        	JasperDesign design  = JRXmlLoader.load(path);
         	
-
+       	
         //	JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("/newReport.jrxml"));
         //Generating the report
        JasperReport jasperReport = JasperCompileManager.compileReport(design);
