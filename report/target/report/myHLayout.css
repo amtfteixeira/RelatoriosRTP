@@ -1,0 +1,5 @@
+@CHARSET "ISO-8859-1";
+.myHLayout .sapUiHLayoutChildWrapper {
+	vertical-align: middle;
+	padding: 0.5rem;
+}
